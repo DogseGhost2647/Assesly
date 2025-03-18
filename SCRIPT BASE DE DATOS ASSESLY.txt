@@ -1,24 +1,28 @@
+DROP DATABASE IF EXISTS assesly;
+CREATE DATABASE assesly;
+USE assesly;
+
 CREATE TABLE usuarios(
 	id_usuario int AUTO_INCREMENT,
     nombre VARCHAR(10) NOT NULL,
     correo VARCHAR(50) NOT NULL,
     contraseña VARCHAR(20) NOT NULL,
     rol ENUM('estudiante','profesor') NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id_usuario)
 );
 
 CREATE TABLE examenes(
 	id_examen int AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     fecha_limite datetime NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id_examen)
 );
 
 CREATE TABLE preguntas(
 	id_pregunta int AUTO_INCREMENT,
     texto TEXT,
     tipo ENUM('multiple','boolean','abierta')NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id_pregunta)
 );
 
 CREATE TABLE respuestas(
@@ -27,7 +31,8 @@ CREATE TABLE respuestas(
     id_examen int,
     id_pregunta int,
     respuesta TEXT,
-    es_correcta BOOLEAN
+    es_correcta BOOLEAN,
+    PRIMARY KEY (id_respuesta)
 );
 
 CREATE TABLE examenes_preguntas(
@@ -41,3 +46,16 @@ CREATE TABLE examenes_usuarios(
     id_examen int,
     PRIMARY KEY (id_usuario, id_examen)
 );
+
+ALTER TABLE examenes_usuarios
+ADD CONSTRAINT fk_examenes FOREIGN KEY (id_examen) REFERENCES examenes (id_examen),
+ADD CONSTRAINT fk_usuarios FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario);
+
+ALTER TABLE examenes_preguntas
+ADD CONSTRAINT fk_examen_pregunta FOREIGN KEY (id_examen) REFERENCES examenes (id_examen),
+ADD CONSTRAINT fk_pregunta_examen FOREIGN KEY (id_pregunta) REFERENCES preguntas (id_pregunta);
+
+ALTER TABLE respuestas
+ADD CONSTRAINT fk_respuestas_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario),
+ADD CONSTRAINT fk_respuestas_examen FOREIGN KEY (id_examen) REFERENCES examenes (id_examen),
+ADD CONSTRAINT fk_respuestas_pregunta FOREIGN KEY (id_pregunta) REFERENCES preguntas (id_pregunta);
