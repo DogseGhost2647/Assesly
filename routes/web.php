@@ -20,11 +20,10 @@ Route::get('/', function () {
 
 Route::get('/examenes/crear', [ExamenController::class, 'crear'])->name('examenes.crear');
 
-Route::post('/examen/store', [ExamenController::class, 'crear'])->name('examenes.store');
+Route::post('/examenes/store', [ExamenController::class, 'store'])->name('examenes.store');
 
 Route::get('/examenes/leer', [ExamenController::class, 'leer'])->name('examenes.leer');
 
-Route::get('/examenes/eliminar', [ExamenController::class, 'eliminar'])->name('examenes.eliminar');
 Route::post('/examenes/destroy', [ExamenController::class, 'destroy'])->name('examenes.destroy');
 
 Route::put('/examenes/{examenes}', [ExamenController::class, 'update'])->name('examenes.update');

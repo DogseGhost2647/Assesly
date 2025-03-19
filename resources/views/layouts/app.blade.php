@@ -17,7 +17,6 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/examenes/crear">Crear Examen</a>
         <a class="nav-link" href="/examenes/leer">Ver Examenes</a>
-        <a class="nav-link" href="/examenes/eliminar">Eliminar Examen</a>
       </div>
     </div>
   </div>

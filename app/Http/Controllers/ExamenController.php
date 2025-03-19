@@ -22,6 +22,22 @@ class ExamenController extends Controller
         return view('examenes.eliminar', compact('examen'));
     }
 
+    public function store(Request $request){
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'fecha_limite' => 'required|date', // Cambia a 'date' genérico
+        ]);
+        
+        // Crear y guardar el examen
+        $examen = new Examen();
+        $examen->nombre = $request->nombre;
+        $examen->fecha_limite = $request->fecha_limite;
+        
+        $examen->save();
+        
+        return redirect()->back()->with('success','Examen creado con éxito!');
+    }
+
     public function update(Request $request, Examen $examen){
         $request->validate([
             'nombre'=>'required|string|max:255',
@@ -31,22 +47,6 @@ class ExamenController extends Controller
         $examen->update($request->all());
 
         return redirect()->back()->with('success','Examen actualizado con éxito!');
-    }
-
-    public function store(Request $request){
-        $request->validate([
-            'nombre'=>'required|string|max:255',
-            'fecha_limite'=>'required|date_format:Y-m-d H:i:s',
-        ]);
-
-        $examen = new Examen();
-        $examen->nombre = $request->nombre;
-        $examen->fecha_limite = $request->fecha_limite;
-
-        $examen->save();
-
-        return redirect()->back()->with('success','Examen creado con éxito!');
-
     }
 
     public function destroy(Request $request){
