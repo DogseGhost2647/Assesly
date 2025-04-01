@@ -14,17 +14,17 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \App\Http\Middleware\TrustProxies::class,
-        \Fruitcake\Cors\HandleCors::class,
+        //\App\Http\Middleware\TrustProxies::class,
+        //Fruitcake\Cors\HandleCors::class,
         \Illuminate\Http\Middleware\SetCacheHeaders::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Http\Middleware\HandleErrors::class,
+        //\Illuminate\Http\Middleware\HandleErrors::class,
         \Illuminate\Cookie\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\Session\Middleware\AuthenticateSession::class,
-        \Illuminate\Http\Middleware\SetLocale::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
+        //\Illuminate\Http\Middleware\SetLocale::class,
+        //\App\Http\Middleware\VerifyCsrfToken::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ];
 
@@ -35,7 +35,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
+            //\App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
