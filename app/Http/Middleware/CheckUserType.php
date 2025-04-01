@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
+
+class CheckUserType
+{
+    public function handle(Request $request, Closure $next, $type)
+    {
+        if (Auth::guard('usuarios')->check() && Auth::guard('usuarios')->user()->rol != $type){
+            return redirect('/examenes/index');
+        }
+
+        return $next($request);
+    }
+}

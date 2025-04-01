@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contracts\ExamenServiceInterface;
+use Illuminate\Support\Facades\Hash;
 
 class ExamenController extends Controller
 {
@@ -12,6 +13,8 @@ class ExamenController extends Controller
     public function __construct(ExamenServiceInterface $examenService)
     {
         $this->examenService = $examenService;
+
+        $this->middleware('auth:usuarios');
     }
 
     public function index()
